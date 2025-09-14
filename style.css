@@ -1,0 +1,25 @@
+body{
+    display: flex;
+}
+.bookshelf{
+    display: flex;
+    flex: 1;
+}
+.create-book{
+    flex: 0.1;
+}
+.book{
+    width: 100px;
+    height: 200px;
+    border: solid black 2px;
+    
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+}
+.new-book-form{
+    display: none;
+    
+}
