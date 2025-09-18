@@ -11,21 +11,52 @@ let sendData = document.querySelector("#send-data")
 let newBookForm = document.querySelector(".new-book-form");
 let toggleForm = document.querySelector(".toggle-form");
 let bookShelf = document.querySelector(".bookshelf")
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.id = crypto.randomUUID();
-}
-Book.prototype.changeReadStatus = function(){
-  if(this.read === "Already read."){
-    this.read = "Not read yet."
+class Book{
+  #id = crypto.randomUUID();
+  constructor(title, author, pages, read){
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read
   }
-  else{
-    this.read = "Already read."
+  get id(){
+    return this.#id;
+  }
+  get title(){
+    return this._title;
+  }
+  get author(){
+    return this._author
+  }
+  get pages (){
+    return this._pages
+  }
+  get read(){
+    return this._read
+  }
+  set title(value){
+    this._title = value
+  }
+  set author(value){
+    this._author = value
+  }
+  set pages(value){
+    this._pages = value
+  }
+  set read(value){
+    this._read = value
+  }
+  changeReadStatus(){
+    if(this.read === "Already read."){
+      this.read = "Not read yet."
+    }
+    else{
+      this.read = "Already read."
+    }
+
   }
 }
+
 
 function addBookToLibrary(title, author, pages, read) {
     let newBook = new Book(title, author, pages, read);
@@ -44,7 +75,7 @@ function addBookToLibrary(title, author, pages, read) {
       let readButton = document.createElement('button');
       readButton.textContent = "Change Read Status";
       readButton.addEventListener('click', ()=>{
-        newBook.changeReadStatus();
+        book.changeReadStatus();
         bookData.querySelector('.read').textContent = book.read;
       })
       bookData.innerHTML = `Title: ${book.title} Author: ${book.author} Pages: ${book.pages} ` +
